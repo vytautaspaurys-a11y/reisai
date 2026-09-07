@@ -28,8 +28,8 @@ PRD: docs/prd-reisai.md
 
 - [ ] 1.0 Vairuotojo reiso forma su laikinais duomenimis
   - [x] 1.1 Sukurti `TripFormPage`: dropdown automobiliui (laikinas sąrašas), dropdown vairuotojui, datos laukas (pagal nutylėjimą rytdiena)
-  - [ ] 1.2 Rodyti automatiškai sugeneruotą reiso numerį (laikina logika: data + `01`)
-  - [ ] 1.3 Pridėti sąskaitų sąrašą: ranka įvesti numerį mygtuku „Pridėti sąskaitą", pašalinti iš sąrašo
+  - [x] 1.2 Rodyti automatiškai sugeneruotą reiso numerį (laikina logika: data + `01`)
+  - [x] 1.3 Pridėti sąskaitų sąrašą: atskiras skenavimo langas, automatinis pridėjimas po skenavimo, pašalinimas iš sąrašo
   - [ ] 1.4 Mygtukas „Išsaugoti reisą" rodo patvirtinimą su reiso numeriu (kol kas be duomenų bazės)
   - [ ] 1.5 Patikrinti naršyklėje: forma veikia, sąskaitas galima pridėti ir pašalinti, patvirtinimas rodomas
 
