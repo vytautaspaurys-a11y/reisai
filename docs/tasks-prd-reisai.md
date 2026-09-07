@@ -26,12 +26,12 @@ PRD: docs/prd-reisai.md
 
 ## Užduotys
 
-- [ ] 1.0 Vairuotojo reiso forma su laikinais duomenimis
+- [x] 1.0 Vairuotojo reiso forma su laikinais duomenimis
   - [x] 1.1 Sukurti `TripFormPage`: dropdown automobiliui (laikinas sąrašas), dropdown vairuotojui, datos laukas (pagal nutylėjimą rytdiena)
   - [x] 1.2 Rodyti automatiškai sugeneruotą reiso numerį (laikina logika: data + `01`)
   - [x] 1.3 Pridėti sąskaitų sąrašą: atskiras skenavimo langas, automatinis pridėjimas po skenavimo, pašalinimas iš sąrašo
-  - [ ] 1.4 Mygtukas „Išsaugoti reisą" rodo patvirtinimą su reiso numeriu (kol kas be duomenų bazės)
-  - [ ] 1.5 Patikrinti naršyklėje: forma veikia, sąskaitas galima pridėti ir pašalinti, patvirtinimas rodomas
+  - [x] 1.4 Mygtukas „Išsaugoti reisą" rodo patvirtinimą su reiso numeriu (kol kas be duomenų bazės)
+  - [x] 1.5 Patikrinti naršyklėje: forma veikia, sąskaitas galima pridėti ir pašalinti, patvirtinimas rodomas
 
 - [ ] 2.0 Supabase lentelės ir prijungimas
   - [ ] 2.1 Parašyti SQL migraciją: lentelės `vehicles`, `drivers`, `trips`, `invoices` su unikaliu `invoice_number` ir `trip_number`

@@ -8,6 +8,7 @@ type InvoiceScanPageProps = {
   invoices: string[]
   onInvoicesChange: (invoices: string[]) => void
   onBack: () => void
+  onSave: () => void
 }
 
 export function InvoiceScanPage({
@@ -15,6 +16,7 @@ export function InvoiceScanPage({
   invoices,
   onInvoicesChange,
   onBack,
+  onSave,
 }: InvoiceScanPageProps) {
   const scannerInputRef = useRef<HTMLInputElement>(null)
 
@@ -102,6 +104,15 @@ export function InvoiceScanPage({
             emptyMessage="Sąskaitų dar nėra. Pradėkite skenuoti."
           />
         </div>
+
+        <button
+          type="button"
+          disabled={invoices.length === 0}
+          onClick={onSave}
+          className="mt-6 w-full rounded-lg bg-indigo-600 px-4 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-slate-300"
+        >
+          Išsaugoti reisą
+        </button>
       </main>
     </div>
   )
