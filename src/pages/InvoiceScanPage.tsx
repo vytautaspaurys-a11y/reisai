@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { InvoiceList } from '../components/InvoiceList'
 import { formatDateWithWeekday } from '../lib/formatDate'
 import { type TripDraft } from '../types/trip'
@@ -8,7 +8,7 @@ type InvoiceScanPageProps = {
   invoices: string[]
   onInvoicesChange: (invoices: string[]) => void
   onBack: () => void
-  onSave: () => void
+  onSave: () => Promise<void>
 }
 
 export function InvoiceScanPage({
@@ -19,6 +19,8 @@ export function InvoiceScanPage({
   onSave,
 }: InvoiceScanPageProps) {
   const scannerInputRef = useRef<HTMLInputElement>(null)
+  const [isSaving, setIsSaving] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(() => {
     scannerInputRef.current?.focus()
@@ -45,6 +47,25 @@ export function InvoiceScanPage({
   function handleRemoveInvoice(index: number) {
     onInvoicesChange(invoices.filter((_, currentIndex) => currentIndex !== index))
     scannerInputRef.current?.focus()
+  }
+
+  async function handleSave() {
+    if (invoices.length === 0 || isSaving) {
+      return
+    }
+
+    setIsSaving(true)
+    setErrorMessage('')
+
+    try {
+      await onSave()
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : 'Nepavyko išsaugoti reiso. Bandykite dar kartą.'
+      setErrorMessage(message)
+    } finally {
+      setIsSaving(false)
+    }
   }
 
   return (
@@ -105,13 +126,21 @@ export function InvoiceScanPage({
           />
         </div>
 
+        {errorMessage && (
+          <p className="mt-4 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+            {errorMessage}
+          </p>
+        )}
+
         <button
           type="button"
-          disabled={invoices.length === 0}
-          onClick={onSave}
+          disabled={invoices.length === 0 || isSaving}
+          onClick={() => {
+            void handleSave()
+          }}
           className="mt-6 w-full rounded-lg bg-indigo-600 px-4 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-slate-300"
         >
-          Išsaugoti reisą
+          {isSaving ? 'Saugoma...' : 'Išsaugoti reisą'}
         </button>
       </main>
     </div>

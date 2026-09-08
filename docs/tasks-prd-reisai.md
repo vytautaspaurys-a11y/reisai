@@ -14,10 +14,12 @@ PRD: docs/prd-reisai.md
 - `src/components/InvoiceList.tsx` – pridėtų sąskaitų sąrašas su pašalinimu
 - `src/components/BarcodeScanner.tsx` – brūkšninio kodo skenavimas (kamera / skaneris)
 - `src/components/TripSuccessMessage.tsx` – patvirtinimas po sėkmingo išsaugojimo
+- `src/lib/saveTrip.ts` – reiso ir sąskaitų išsaugojimas
 - `src/lib/supabase.ts` – Supabase klientas
 - `src/lib/tripNumber.ts` – reiso numerio generavimo logika
 - `src/lib/exportTrips.ts` – Excel ir CSV eksportas
 - `src/types/database.ts` – TypeScript tipai lentelėms
+- `src/hooks/useActiveLists.ts` – aktyvių automobilių ir vairuotojų sąrašas iš Supabase
 - `src/hooks/useAuth.ts` – administratoriaus sesijos valdymas
 - `src/App.tsx` – maršrutai (vairuotojo forma, admin sritis)
 - `supabase/migrations/001_initial_schema.sql` – lentelių ir RLS SQL (įklijuosi į Supabase SQL Editor)
@@ -33,13 +35,13 @@ PRD: docs/prd-reisai.md
   - [x] 1.4 Mygtukas „Išsaugoti reisą" rodo patvirtinimą su reiso numeriu (kol kas be duomenų bazės)
   - [x] 1.5 Patikrinti naršyklėje: forma veikia, sąskaitas galima pridėti ir pašalinti, patvirtinimas rodomas
 
-- [ ] 2.0 Supabase lentelės ir prijungimas
-  - [ ] 2.1 Parašyti SQL migraciją: lentelės `vehicles`, `drivers`, `trips`, `invoices` su unikaliu `invoice_number` ir `trip_number`
-  - [ ] 2.2 Vartotojas įklijuoja SQL į Supabase SQL Editor ir paleidžia; pridėti kelis testinius automobilius ir vairuotojus per Table Editor
-  - [ ] 2.3 Sukurti `src/lib/supabase.ts` ir `.env` su `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`
-  - [ ] 2.4 Formoje automobilius ir vairuotojus skaityti iš Supabase (tik aktyvūs, `is_active = true`)
-  - [ ] 2.5 Išsaugant reisą: sukurti `trips` įrašą su automatiškai sugeneruotu `trip_number` ir `invoices` įrašus
-  - [ ] 2.6 Patikrinti naršyklėje: reisas išsaugomas; Supabase Table Editor matosi `trips` ir `invoices` įrašai
+- [x] 2.0 Supabase lentelės ir prijungimas
+  - [x] 2.1 Parašyti SQL migraciją: lentelės `vehicles`, `drivers`, `trips`, `invoices` su unikaliu `invoice_number` ir `trip_number`
+  - [x] 2.2 Vartotojas įklijuoja SQL į Supabase SQL Editor ir paleidžia; pridėti kelis testinius automobilius ir vairuotojus per Table Editor
+  - [x] 2.3 Sukurti `src/lib/supabase.ts` ir `.env` su `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`
+  - [x] 2.4 Formoje automobilius ir vairuotojus skaityti iš Supabase (tik aktyvūs, `is_active = true`)
+  - [x] 2.5 Išsaugant reisą: sukurti `trips` įrašą su automatiškai sugeneruotu `trip_number` ir `invoices` įrašus
+  - [x] 2.6 Patikrinti naršyklėje: reisas išsaugomas; Supabase Table Editor matosi `trips` ir `invoices` įrašai
 
 - [ ] 3.0 Administratoriaus prisijungimas ir sąrašų valdymas
   - [ ] 3.1 Sukurti admin paskyrą Supabase Auth (el. paštas + slaptažodis)

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { TripSuccessMessage } from './components/TripSuccessMessage'
+import { saveTrip } from './lib/saveTrip'
 import { InvoiceScanPage } from './pages/InvoiceScanPage'
 import { TripFormPage } from './pages/TripFormPage'
 import type { TripDraft } from './types/trip'
@@ -28,9 +29,9 @@ function App() {
         invoices={invoices}
         onInvoicesChange={setInvoices}
         onBack={() => setView('form')}
-        onSave={() => {
-          // Kol kas be duomenų bazės – tik parodome patvirtinimą
-          setSavedTripNumber(tripDraft.tripNumber)
+        onSave={async () => {
+          const tripNumber = await saveTrip(tripDraft, invoices)
+          setSavedTripNumber(tripNumber)
           setView('success')
         }}
       />

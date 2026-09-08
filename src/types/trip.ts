@@ -7,18 +7,6 @@ export type TripDraft = {
   tripNumber: string
 }
 
-export const TEMP_VEHICLES = [
-  { id: '1', plateNumber: 'ABC 123' },
-  { id: '2', plateNumber: 'XYZ 789' },
-  { id: '3', plateNumber: 'KLT 456' },
-]
-
-export const TEMP_DRIVERS = [
-  { id: '1', name: 'Jonas Petraitis' },
-  { id: '2', name: 'Petras Jonaitis' },
-  { id: '3', name: 'Ona Kazlauskienė' },
-]
-
 export function getTomorrowDate(): string {
   const tomorrow = new Date()
   tomorrow.setDate(tomorrow.getDate() + 1)

@@ -9,10 +9,17 @@ lerna-debug.log*
 
 node_modules
 dist
+dist-ssr
+
+# Aplinkos kintamieji ir raktai — niekada į GitHub
 .env
+.env.local
+.env.development.local
+.env.production.local
+.env.*.local
+env.local
 .env.*
 !.env.example
-dist-ssr
 *.local
 
 # Editor directories and files
