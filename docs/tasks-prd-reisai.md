@@ -54,11 +54,11 @@ PRD: docs/prd-reisai.md
   - [x] 3.5 Sukurti `DriversPage`: lentelė (vardas), pridėti, redaguoti, ištrinti
   - [x] 3.6 Patikrinti naršyklėje: prisijungus admin mato ir tvarko automobilius bei vairuotojus; vairuotojo formoje matosi atnaujinti sąrašai
 
-- [ ] 4.0 Brūkšninių kodų skenavimas
+- [x] 4.0 Brūkšninių kodų skenavimas
   - [x] 4.1 Kompiuteryje: paslėptas input laukas, kuris priima skanerio įvestį ir prideda sąskaitą
   - [x] 4.2 Telefone: `BarcodeScanner` komponentas su kamera (`@zxing/browser` arba panaši biblioteka)
   - [x] 4.3 Prieš pridėjimą tikrinti, ar sąskaitos numeris jau egzistuoja `invoices` lentelėje; jei taip – rodyti aiškų lietuvišką pranešimą
-  - [ ] 4.4 Patikrinti naršyklėje: kompiuteryje galima „įvesti" numerį kaip skanerį; telefone atsidaro kamera; dubliuotas numeris atmetamas
+  - [x] 4.4 Patikrinti naršyklėje: kompiuteryje galima „įvesti" numerį kaip skanerį; telefone atsidaro kamera; dubliuotas numeris atmetamas
 
 - [ ] 5.0 Administratoriaus reisų valdymas
   - [ ] 5.1 Sukurti `TripsPage`: reisų lentelė (numeris, data, vairuotojas, automobilis, sąskaitų skaičius), naujausi viršuje
