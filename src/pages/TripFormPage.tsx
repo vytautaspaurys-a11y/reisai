@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useActiveLists } from '../hooks/useActiveLists'
-import { getWeekdayName } from '../lib/formatDate'
+import { getRelativeDayLabel, getWeekdayName } from '../lib/formatDate'
 import { buildTripNumber } from '../lib/tripNumber'
 import { getTomorrowDate, type TripDraft } from '../types/trip'
 
@@ -16,6 +16,7 @@ export function TripFormPage({ initialValues, onStartScanning }: TripFormPagePro
   const [tripDate, setTripDate] = useState(initialValues?.tripDate ?? getTomorrowDate())
   const { vehicles, drivers, isLoading, errorMessage } = useActiveLists()
   const tripNumber = buildTripNumber(tripDate)
+  const relativeDayLabel = getRelativeDayLabel(tripDate)
 
   const isFormComplete = Boolean(vehicleId && driverId && tripDate && !isLoading && !errorMessage)
 
@@ -112,6 +113,7 @@ export function TripFormPage({ initialValues, onStartScanning }: TripFormPagePro
             {tripDate && (
               <span className="text-base font-semibold text-indigo-700">
                 Pasirinkta diena: {getWeekdayName(tripDate)}
+                {relativeDayLabel ? `, ${relativeDayLabel}` : ''}
               </span>
             )}
           </label>

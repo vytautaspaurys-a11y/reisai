@@ -66,7 +66,7 @@ PRD: docs/prd-reisai.md
   - [x] 4.3 Prieš pridėjimą tikrinti, ar sąskaitos numeris jau egzistuoja `invoices` lentelėje; jei taip – rodyti aiškų lietuvišką pranešimą
   - [x] 4.4 Patikrinti naršyklėje: kompiuteryje galima „įvesti" numerį kaip skanerį; telefone atsidaro kamera; dubliuotas numeris atmetamas
 
-- [ ] 5.0 Administratoriaus reisų valdymas
+- [x] 5.0 Administratoriaus reisų valdymas
   - [x] 5.1 Sukurti `TripsPage`: reisų lentelė (numeris, data, vairuotojas, automobilis, sąskaitų skaičius), naujausi viršuje
   - [x] 5.15 Sukurti `InvoicesPage`: sąskaitų lentelė (reiso numeris, data, automobilis, vairuotojas, sąskaitos numeris)
   - [x] 5.2 Pridėti filtrus: data (nuo–iki), vairuotojas, automobilis
@@ -75,7 +75,7 @@ PRD: docs/prd-reisai.md
   - [x] 5.35 Pridėti paiešką Sąskaitų skiltyje pagal reiso arba sąskaitos numerį
   - [x] 5.5 Pridėti mygtukus „Eksportuoti į Excel" ir „Eksportuoti į CSV" (eksportuoja tik filtruotą sąrašą)
   - [x] 5.55 Pridėti sąskaitų eksportą į Excel ir CSV (eksportuoja tik filtruotą sąrašą)
-  - [ ] 5.6 Patikrinti naršyklėje: filtrai ir paieška veikia, Excel/CSV failas atsisiunčiamas
+  - [x] 5.6 Patikrinti naršyklėje: filtrai ir paieška veikia, Excel/CSV failas atsisiunčiamas
 
 - [ ] 6.0 PWA ir paleidimas internete
   - [ ] 6.1 Pridėti PWA manifestą ir service worker (Vite PWA plugin arba rankiniu būdu)
@@ -89,3 +89,7 @@ PRD: docs/prd-reisai.md
   - [ ] 7.3 Administratoriaus forma naujam reisui: automobilis, vairuotojas, data, pastabos, sąskaitos (galima išsaugoti ir be sąskaitų)
   - [ ] 7.4 Esamo reiso tvarkymas: taisyti automobilį, vairuotoją, datą ir pastabas; pridėti arba pašalinti sąskaitas; ištrinti reisą
   - [ ] 7.5 Patikrinti naršyklėje: galima sukurti reisą, pridėti pamirštą sąskaitą, įrašyti pastabą ir ištrinti reisą
+
+- [x] 8.0 Pasirinktos dienos paaiškinimas reiso formoje
+  - [x] 8.1 Prie „Pasirinkta diena“ rodyti savaitės dieną ir pridėti „Šiandien“ arba „Rytoj“, jei pasirinkta ta data; kitoms datoms papildomo žodžio nerašyti
+  - [x] 8.2 Patikrinti naršyklėje: šiandienos data rodo „Šiandien“, rytdiena – „Rytoj“, kita data – tik savaitės dieną
