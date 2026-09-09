@@ -58,8 +58,11 @@ Web aplikacija įmonės vairuotojams registruoti atliekamus reisus ir susieti su
 19. Administratorius gali ieškoti pagal reiso numerį arba sąskaitos numerį.
 20. Administratorius gali eksportuoti filtruotą reisų sąrašą į Excel (`.xlsx`) failą.
 21. Administratorius gali eksportuoti filtruotą reisų sąrašą į CSV failą.
-22. Administratorius gali atidaryti reisą ir redaguoti jo duomenis (automobilį, vairuotoją, datą, sąskaitas).
+22. Administratorius gali atidaryti reisą ir redaguoti jo duomenis (automobilį, vairuotoją, datą, pastabas, sąskaitas).
 23. Administratorius gali ištrinti reisą.
+23a. Administratorius gali pats užregistruoti naują reisą (kai vairuotojas to nepadaro).
+23b. Administratorius gali prie esamo reiso pridėti sąskaitas, jei vairuotojas jas pamiršo.
+23c. Reisas turi neprivalomą pastabų lauką, kurį mato ir pildo tik administratorius.
 
 ### PWA ir skenavimas
 
@@ -111,6 +114,7 @@ Web aplikacija įmonės vairuotojams registruoti atliekamus reisus ir susieti su
 | `driver_id` | Nuoroda į vairuotoją |
 | `vehicle_id` | Nuoroda į automobilį |
 | `trip_date` | Reiso data |
+| `notes` | Administratoriaus pastabos (neprivaloma) |
 | `created_at` | Išsaugojimo data ir laikas |
 
 ### Lentelė: `invoices` (sąskaitos)

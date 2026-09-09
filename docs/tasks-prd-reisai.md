@@ -7,11 +7,13 @@ PRD: docs/prd-reisai.md
 - `src/pages/TripFormPage.tsx` – vairuotojo reiso registravimo forma
 - `src/pages/DriverApp.tsx` – vairuotojo reiso registravimo eiga
 - `src/pages/admin/LoginPage.tsx` – administratoriaus prisijungimas
-- `src/pages/admin/AdminLayout.tsx` – admin navigacija (Automobiliai, Vairuotojai, Reisai)
+- `src/pages/admin/AdminLayout.tsx` – admin navigacija (Automobiliai, Vairuotojai, Reisai, Sąskaitos)
 - `src/pages/admin/VehiclesPage.tsx` – automobilių sąrašas ir forma
 - `src/pages/admin/DriversPage.tsx` – vairuotojų sąrašas ir forma
 - `src/pages/admin/TripsPage.tsx` – reisų sąrašas su filtrais ir eksportu
+- `src/pages/admin/InvoicesPage.tsx` – sąskaitų sąrašas
 - `src/pages/admin/TripEditPage.tsx` – vieno reiso redagavimas
+- `src/pages/admin/AdminTripFormPage.tsx` – administratoriaus naujas reisas
 - `src/components/InvoiceList.tsx` – pridėtų sąskaitų sąrašas su pašalinimu
 - `src/components/BarcodeScanner.tsx` – brūkšninio kodo skenavimas (kamera / skaneris)
 - `src/components/TripSuccessMessage.tsx` – patvirtinimas po sėkmingo išsaugojimo
@@ -61,15 +63,24 @@ PRD: docs/prd-reisai.md
   - [x] 4.4 Patikrinti naršyklėje: kompiuteryje galima „įvesti" numerį kaip skanerį; telefone atsidaro kamera; dubliuotas numeris atmetamas
 
 - [ ] 5.0 Administratoriaus reisų valdymas
-  - [ ] 5.1 Sukurti `TripsPage`: reisų lentelė (numeris, data, vairuotojas, automobilis, sąskaitų skaičius), naujausi viršuje
-  - [ ] 5.2 Pridėti filtrus: data (nuo–iki), vairuotojas, automobilis
-  - [ ] 5.3 Pridėti paiešką pagal reiso numerį arba sąskaitos numerį
-  - [ ] 5.4 Sukurti `TripEditPage`: redaguoti reisą ir sąskaitas, ištrinti reisą
+  - [x] 5.1 Sukurti `TripsPage`: reisų lentelė (numeris, data, vairuotojas, automobilis, sąskaitų skaičius), naujausi viršuje
+  - [x] 5.15 Sukurti `InvoicesPage`: sąskaitų lentelė (reiso numeris, data, automobilis, vairuotojas, sąskaitos numeris)
+  - [x] 5.2 Pridėti filtrus: data (nuo–iki), vairuotojas, automobilis
+  - [x] 5.25 Pridėti filtrus Sąskaitų skiltyje: data (nuo–iki), vairuotojas, automobilis
+  - [x] 5.3 Pridėti paiešką pagal reiso numerį arba sąskaitos numerį
+  - [x] 5.35 Pridėti paiešką Sąskaitų skiltyje pagal reiso arba sąskaitos numerį
   - [ ] 5.5 Pridėti mygtukus „Eksportuoti į Excel" ir „Eksportuoti į CSV" (eksportuoja tik filtruotą sąrašą)
-  - [ ] 5.6 Patikrinti naršyklėje: filtrai ir paieška veikia, reisą galima redaguoti, Excel/CSV failas atsisiunčiamas
+  - [ ] 5.6 Patikrinti naršyklėje: filtrai ir paieška veikia, Excel/CSV failas atsisiunčiamas
 
 - [ ] 6.0 PWA ir paleidimas internete
   - [ ] 6.1 Pridėti PWA manifestą ir service worker (Vite PWA plugin arba rankiniu būdu)
   - [ ] 6.2 Paruošti vietą logotipui (`public/logo.png`) – rodyti viršuje vairuotojo formoje ir admin skydelyje
   - [ ] 6.3 Sujungti projektą su Vercel, nustatyti aplinkos kintamuosius (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`)
   - [ ] 6.4 Patikrinti: svetainė veikia internete; telefone galima pridėti į pradžios ekraną ir skenuoti kamera
+
+- [ ] 7.0 Administratoriaus reisų redagavimas
+  - [ ] 7.1 Pridėti reiso lauką `notes` (pastabos) per SQL; rodyti jį Reisų ir Sąskaitų lentelėse
+  - [ ] 7.2 Meniu grupė „Redagavimas“: nuoroda „Tvarkyti reisus“
+  - [ ] 7.3 Administratoriaus forma naujam reisui: automobilis, vairuotojas, data, pastabos, sąskaitos (galima išsaugoti ir be sąskaitų)
+  - [ ] 7.4 Esamo reiso tvarkymas: taisyti automobilį, vairuotoją, datą ir pastabas; pridėti arba pašalinti sąskaitas; ištrinti reisą
+  - [ ] 7.5 Patikrinti naršyklėje: galima sukurti reisą, pridėti pamirštą sąskaitą, įrašyti pastabą ir ištrinti reisą
