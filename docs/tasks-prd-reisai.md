@@ -54,7 +54,7 @@ PRD: docs/prd-reisai.md
 
 - [ ] 4.0 Brūkšninių kodų skenavimas
   - [x] 4.1 Kompiuteryje: paslėptas input laukas, kuris priima skanerio įvestį ir prideda sąskaitą
-  - [ ] 4.2 Telefone: `BarcodeScanner` komponentas su kamera (`@zxing/browser` arba panaši biblioteka)
+  - [x] 4.2 Telefone: `BarcodeScanner` komponentas su kamera (`@zxing/browser` arba panaši biblioteka)
   - [ ] 4.3 Prieš pridėjimą tikrinti, ar sąskaitos numeris jau egzistuoja `invoices` lentelėje; jei taip – rodyti aiškų lietuvišką pranešimą
   - [ ] 4.4 Patikrinti naršyklėje: kompiuteryje galima „įvesti" numerį kaip skanerį; telefone atsidaro kamera; dubliuotas numeris atmetamas
 

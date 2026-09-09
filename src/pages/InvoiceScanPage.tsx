@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { BarcodeScanner } from '../components/BarcodeScanner'
 import { InvoiceList } from '../components/InvoiceList'
 import { formatDateWithWeekday } from '../lib/formatDate'
 import { type TripDraft } from '../types/trip'
@@ -20,6 +21,7 @@ export function InvoiceScanPage({
 }: InvoiceScanPageProps) {
   const scannerInputRef = useRef<HTMLInputElement>(null)
   const [scanPreview, setScanPreview] = useState('')
+  const [isCameraOpen, setIsCameraOpen] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -28,8 +30,26 @@ export function InvoiceScanPage({
   }
 
   useEffect(() => {
-    focusScanner()
-  }, [invoices])
+    if (window.matchMedia('(pointer: coarse)').matches) {
+      setIsCameraOpen(true)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!isCameraOpen) {
+      focusScanner()
+    }
+  }, [invoices, isCameraOpen])
+
+  function addInvoiceNumber(rawNumber: string) {
+    const trimmedNumber = rawNumber.trim()
+
+    if (!trimmedNumber) {
+      return
+    }
+
+    onInvoicesChange([...invoices, trimmedNumber])
+  }
 
   function handleScannerInput(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key !== 'Enter') {
@@ -37,14 +57,7 @@ export function InvoiceScanPage({
     }
 
     event.preventDefault()
-
-    const trimmedNumber = event.currentTarget.value.trim()
-
-    if (!trimmedNumber) {
-      return
-    }
-
-    onInvoicesChange([...invoices, trimmedNumber])
+    addInvoiceNumber(event.currentTarget.value)
     event.currentTarget.value = ''
     setScanPreview('')
     focusScanner()
@@ -130,6 +143,10 @@ export function InvoiceScanPage({
             autoFocus
             onChange={(event) => setScanPreview(event.target.value)}
             onBlur={() => {
+              if (isCameraOpen) {
+                return
+              }
+
               window.setTimeout(() => {
                 const activeElement = document.activeElement
                 if (activeElement instanceof HTMLButtonElement || activeElement instanceof HTMLAnchorElement) {
@@ -141,6 +158,21 @@ export function InvoiceScanPage({
             onKeyDown={handleScannerInput}
             className="sr-only"
           />
+
+          {isCameraOpen ? (
+            <BarcodeScanner
+              onDetected={addInvoiceNumber}
+              onClose={() => setIsCameraOpen(false)}
+            />
+          ) : (
+            <button
+              type="button"
+              onClick={() => setIsCameraOpen(true)}
+              className="w-full rounded-lg border border-indigo-200 bg-white px-4 py-2.5 text-sm font-medium text-indigo-700 transition hover:bg-indigo-50"
+            >
+              Skenuoti kamera
+            </button>
+          )}
         </div>
 
         <div className="mt-6 flex flex-col gap-2">
