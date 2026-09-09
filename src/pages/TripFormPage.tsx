@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useActiveLists } from '../hooks/useActiveLists'
 import { getWeekdayName } from '../lib/formatDate'
 import { buildTripNumber } from '../lib/tripNumber'
@@ -124,6 +125,12 @@ export function TripFormPage({ initialValues, onStartScanning }: TripFormPagePro
             Skenuoti sąskaitas
           </button>
         </form>
+
+        <p className="mt-6 text-center text-sm text-slate-500">
+          <Link to="/admin/login" className="font-medium text-indigo-600 hover:text-indigo-700">
+            Administratoriaus prisijungimas
+          </Link>
+        </p>
       </main>
     </div>
   )

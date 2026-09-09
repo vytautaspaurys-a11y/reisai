@@ -86,6 +86,96 @@ create policy drivers_public_read
   to anon, authenticated
   using (true);
 
+-- Rašyti automobilius ir vairuotojus gali tik prisijungęs administratorius
+create policy vehicles_admin_insert
+  on public.vehicles
+  for insert
+  to authenticated
+  with check (true);
+
+create policy vehicles_admin_update
+  on public.vehicles
+  for update
+  to authenticated
+  using (true)
+  with check (true);
+
+create policy vehicles_admin_delete
+  on public.vehicles
+  for delete
+  to authenticated
+  using (true);
+
+create policy drivers_admin_insert
+  on public.drivers
+  for insert
+  to authenticated
+  with check (true);
+
+create policy drivers_admin_update
+  on public.drivers
+  for update
+  to authenticated
+  using (true)
+  with check (true);
+
+create policy drivers_admin_delete
+  on public.drivers
+  for delete
+  to authenticated
+  using (true);
+
+-- Reisus ir sąskaitas kurti gali visi; skaityti ir taisyti – tik administratorius
+create policy trips_public_insert
+  on public.trips
+  for insert
+  to anon, authenticated
+  with check (true);
+
+create policy trips_admin_select
+  on public.trips
+  for select
+  to authenticated
+  using (true);
+
+create policy trips_admin_update
+  on public.trips
+  for update
+  to authenticated
+  using (true)
+  with check (true);
+
+create policy trips_admin_delete
+  on public.trips
+  for delete
+  to authenticated
+  using (true);
+
+create policy invoices_public_insert
+  on public.invoices
+  for insert
+  to anon, authenticated
+  with check (true);
+
+create policy invoices_admin_select
+  on public.invoices
+  for select
+  to authenticated
+  using (true);
+
+create policy invoices_admin_update
+  on public.invoices
+  for update
+  to authenticated
+  using (true)
+  with check (true);
+
+create policy invoices_admin_delete
+  on public.invoices
+  for delete
+  to authenticated
+  using (true);
+
 create index if not exists trips_trip_date_idx on public.trips (trip_date desc);
 create index if not exists trips_driver_id_idx on public.trips (driver_id);
 create index if not exists trips_vehicle_id_idx on public.trips (vehicle_id);

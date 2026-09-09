@@ -1,52 +1,25 @@
-import { useState } from 'react'
-import { TripSuccessMessage } from './components/TripSuccessMessage'
-import { saveTrip } from './lib/saveTrip'
-import { InvoiceScanPage } from './pages/InvoiceScanPage'
-import { TripFormPage } from './pages/TripFormPage'
-import type { TripDraft } from './types/trip'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import { AdminLayout } from './pages/admin/AdminLayout'
+import { AdminPlaceholderPage } from './pages/admin/AdminPlaceholderPage'
+import { LoginPage } from './pages/admin/LoginPage'
+import { ProtectedAdmin } from './pages/admin/ProtectedAdmin'
+import { DriversPage } from './pages/admin/DriversPage'
+import { VehiclesPage } from './pages/admin/VehiclesPage'
+import { DriverApp } from './pages/DriverApp'
 
-function App() {
-  const [view, setView] = useState<'form' | 'scan' | 'success'>('form')
-  const [tripDraft, setTripDraft] = useState<TripDraft | null>(null)
-  const [invoices, setInvoices] = useState<string[]>([])
-  const [savedTripNumber, setSavedTripNumber] = useState('')
-
-  function handleNewTrip() {
-    setView('form')
-    setTripDraft(null)
-    setInvoices([])
-    setSavedTripNumber('')
-  }
-
-  if (view === 'success' && savedTripNumber) {
-    return <TripSuccessMessage tripNumber={savedTripNumber} onNewTrip={handleNewTrip} />
-  }
-
-  if (view === 'scan' && tripDraft) {
-    return (
-      <InvoiceScanPage
-        trip={tripDraft}
-        invoices={invoices}
-        onInvoicesChange={setInvoices}
-        onBack={() => setView('form')}
-        onSave={async () => {
-          const tripNumber = await saveTrip(tripDraft, invoices)
-          setSavedTripNumber(tripNumber)
-          setView('success')
-        }}
-      />
-    )
-  }
-
+export default function App() {
   return (
-    <TripFormPage
-      initialValues={tripDraft}
-      onStartScanning={(draft) => {
-        setTripDraft(draft)
-        setView('scan')
-      }}
-    />
+    <Routes>
+      <Route path="/" element={<DriverApp />} />
+      <Route path="/admin/login" element={<LoginPage />} />
+      <Route path="/admin" element={<ProtectedAdmin />}>
+        <Route element={<AdminLayout />}>
+          <Route index element={<Navigate to="vehicles" replace />} />
+          <Route path="vehicles" element={<VehiclesPage />} />
+          <Route path="drivers" element={<DriversPage />} />
+          <Route path="trips" element={<AdminPlaceholderPage title="Reisai" />} />
+        </Route>
+      </Route>
+    </Routes>
   )
 }
-
-export default App

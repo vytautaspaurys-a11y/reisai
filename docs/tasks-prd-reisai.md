@@ -5,6 +5,7 @@ PRD: docs/prd-reisai.md
 ## Failai
 
 - `src/pages/TripFormPage.tsx` – vairuotojo reiso registravimo forma
+- `src/pages/DriverApp.tsx` – vairuotojo reiso registravimo eiga
 - `src/pages/admin/LoginPage.tsx` – administratoriaus prisijungimas
 - `src/pages/admin/AdminLayout.tsx` – admin navigacija (Automobiliai, Vairuotojai, Reisai)
 - `src/pages/admin/VehiclesPage.tsx` – automobilių sąrašas ir forma
@@ -43,13 +44,13 @@ PRD: docs/prd-reisai.md
   - [x] 2.5 Išsaugant reisą: sukurti `trips` įrašą su automatiškai sugeneruotu `trip_number` ir `invoices` įrašus
   - [x] 2.6 Patikrinti naršyklėje: reisas išsaugomas; Supabase Table Editor matosi `trips` ir `invoices` įrašai
 
-- [ ] 3.0 Administratoriaus prisijungimas ir sąrašų valdymas
-  - [ ] 3.1 Sukurti admin paskyrą Supabase Auth (el. paštas + slaptažodis)
-  - [ ] 3.2 Pridėti RLS taisykles: `vehicles` ir `drivers` – visi skaito, rašo tik prisijungęs admin; `trips`/`invoices` – kurti gali visi, skaityti/redaguoti tik admin
-  - [ ] 3.3 Sukurti `LoginPage` ir `useAuth`: prisijungimas, apsaugoti admin maršrutai
-  - [ ] 3.4 Sukurti `VehiclesPage`: lentelė (numeris, markė, įmonė), pridėti, redaguoti, ištrinti
-  - [ ] 3.5 Sukurti `DriversPage`: lentelė (vardas), pridėti, redaguoti, ištrinti
-  - [ ] 3.6 Patikrinti naršyklėje: prisijungus admin mato ir tvarko automobilius bei vairuotojus; vairuotojo formoje matosi atnaujinti sąrašai
+- [x] 3.0 Administratoriaus prisijungimas ir sąrašų valdymas
+  - [x] 3.1 Sukurti admin paskyrą Supabase Auth (el. paštas + slaptažodis)
+  - [x] 3.2 Pridėti RLS taisykles: `vehicles` ir `drivers` – visi skaito, rašo tik prisijungęs admin; `trips`/`invoices` – kurti gali visi, skaityti/redaguoti tik admin
+  - [x] 3.3 Sukurti `LoginPage` ir `useAuth`: prisijungimas, apsaugoti admin maršrutai
+  - [x] 3.4 Sukurti `VehiclesPage`: lentelė (numeris, markė, įmonė), pridėti, redaguoti, ištrinti
+  - [x] 3.5 Sukurti `DriversPage`: lentelė (vardas), pridėti, redaguoti, ištrinti
+  - [x] 3.6 Patikrinti naršyklėje: prisijungus admin mato ir tvarko automobilius bei vairuotojus; vairuotojo formoje matosi atnaujinti sąrašai
 
 - [ ] 4.0 Brūkšninių kodų skenavimas
   - [ ] 4.1 Kompiuteryje: paslėptas input laukas, kuris priima skanerio įvestį ir prideda sąskaitą
