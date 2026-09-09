@@ -19,12 +19,17 @@ export function InvoiceScanPage({
   onSave,
 }: InvoiceScanPageProps) {
   const scannerInputRef = useRef<HTMLInputElement>(null)
+  const [scanPreview, setScanPreview] = useState('')
   const [isSaving, setIsSaving] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 
-  useEffect(() => {
+  function focusScanner() {
     scannerInputRef.current?.focus()
-  }, [])
+  }
+
+  useEffect(() => {
+    focusScanner()
+  }, [invoices])
 
   function handleScannerInput(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key !== 'Enter') {
@@ -41,12 +46,13 @@ export function InvoiceScanPage({
 
     onInvoicesChange([...invoices, trimmedNumber])
     event.currentTarget.value = ''
-    scannerInputRef.current?.focus()
+    setScanPreview('')
+    focusScanner()
   }
 
   function handleRemoveInvoice(index: number) {
     onInvoicesChange(invoices.filter((_, currentIndex) => currentIndex !== index))
-    scannerInputRef.current?.focus()
+    focusScanner()
   }
 
   async function handleSave() {
@@ -100,7 +106,20 @@ export function InvoiceScanPage({
         </div>
 
         <div className="mt-6 flex flex-col gap-2">
-          <label className="text-sm font-medium text-slate-700" htmlFor="invoice-scanner">
+          <p className="text-sm font-medium text-slate-700">Sąskaitos skenavimas</p>
+          <div
+            role="presentation"
+            onClick={focusScanner}
+            className="w-full cursor-text rounded-xl border-2 border-dashed border-indigo-300 bg-indigo-50 px-4 py-8 text-center transition hover:border-indigo-400 hover:bg-indigo-100"
+          >
+            <p className="text-base font-semibold text-indigo-800">
+              {scanPreview ? scanPreview : 'Laukiama skenavimo...'}
+            </p>
+            <p className="mt-2 text-xs text-indigo-700">
+              Skanuokite brūkšninį kodą arba įveskite numerį ir paspauskite Enter.
+            </p>
+          </div>
+          <label htmlFor="invoice-scanner" className="sr-only">
             Sąskaitos numeris
           </label>
           <input
@@ -108,13 +127,20 @@ export function InvoiceScanPage({
             id="invoice-scanner"
             type="text"
             autoComplete="off"
-            placeholder="Skenuokite arba įveskite numerį ir paspauskite Enter"
+            autoFocus
+            onChange={(event) => setScanPreview(event.target.value)}
+            onBlur={() => {
+              window.setTimeout(() => {
+                const activeElement = document.activeElement
+                if (activeElement instanceof HTMLButtonElement || activeElement instanceof HTMLAnchorElement) {
+                  return
+                }
+                focusScanner()
+              }, 0)
+            }}
             onKeyDown={handleScannerInput}
-            className="rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-base text-slate-900 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+            className="sr-only"
           />
-          <p className="text-xs text-slate-500">
-            Po kiekvieno skenavimo numeris pridedamas automatiškai.
-          </p>
         </div>
 
         <div className="mt-6 flex flex-col gap-2">
