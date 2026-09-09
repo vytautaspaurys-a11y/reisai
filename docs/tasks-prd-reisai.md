@@ -16,6 +16,7 @@ PRD: docs/prd-reisai.md
 - `src/components/BarcodeScanner.tsx` – brūkšninio kodo skenavimas (kamera / skaneris)
 - `src/components/TripSuccessMessage.tsx` – patvirtinimas po sėkmingo išsaugojimo
 - `src/lib/saveTrip.ts` – reiso ir sąskaitų išsaugojimas
+- `src/lib/invoiceExists.ts` – ar sąskaitos numeris jau naudotas
 - `src/lib/supabase.ts` – Supabase klientas
 - `src/lib/tripNumber.ts` – reiso numerio generavimo logika
 - `src/lib/exportTrips.ts` – Excel ir CSV eksportas
@@ -24,6 +25,7 @@ PRD: docs/prd-reisai.md
 - `src/hooks/useAuth.ts` – administratoriaus sesijos valdymas
 - `src/App.tsx` – maršrutai (vairuotojo forma, admin sritis)
 - `supabase/migrations/001_initial_schema.sql` – lentelių ir RLS SQL (įklijuosi į Supabase SQL Editor)
+- `supabase/migrations/002_invoice_number_exists.sql` – sąskaitos numerio patikrinimo funkcija
 - `public/manifest.webmanifest` – PWA manifestas
 - `.env` – Supabase raktai (necommitinama)
 
@@ -55,7 +57,7 @@ PRD: docs/prd-reisai.md
 - [ ] 4.0 Brūkšninių kodų skenavimas
   - [x] 4.1 Kompiuteryje: paslėptas input laukas, kuris priima skanerio įvestį ir prideda sąskaitą
   - [x] 4.2 Telefone: `BarcodeScanner` komponentas su kamera (`@zxing/browser` arba panaši biblioteka)
-  - [ ] 4.3 Prieš pridėjimą tikrinti, ar sąskaitos numeris jau egzistuoja `invoices` lentelėje; jei taip – rodyti aiškų lietuvišką pranešimą
+  - [x] 4.3 Prieš pridėjimą tikrinti, ar sąskaitos numeris jau egzistuoja `invoices` lentelėje; jei taip – rodyti aiškų lietuvišką pranešimą
   - [ ] 4.4 Patikrinti naršyklėje: kompiuteryje galima „įvesti" numerį kaip skanerį; telefone atsidaro kamera; dubliuotas numeris atmetamas
 
 - [ ] 5.0 Administratoriaus reisų valdymas

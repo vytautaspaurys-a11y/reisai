@@ -134,6 +134,12 @@ export type Database = {
         }
         Returns: string
       }
+      invoice_number_exists: {
+        Args: {
+          p_invoice_number: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { BarcodeScanner } from '../components/BarcodeScanner'
 import { InvoiceList } from '../components/InvoiceList'
 import { formatDateWithWeekday } from '../lib/formatDate'
+import { invoiceNumberExists } from '../lib/invoiceExists'
 import { type TripDraft } from '../types/trip'
 
 type InvoiceScanPageProps = {
@@ -41,14 +42,36 @@ export function InvoiceScanPage({
     }
   }, [invoices, isCameraOpen])
 
-  function addInvoiceNumber(rawNumber: string) {
+  async function addInvoiceNumber(rawNumber: string) {
     const trimmedNumber = rawNumber.trim()
 
     if (!trimmedNumber) {
       return
     }
 
-    onInvoicesChange([...invoices, trimmedNumber])
+    if (invoices.some((invoice) => invoice.trim() === trimmedNumber)) {
+      setErrorMessage('Ši sąskaita jau pridėta prie šio reiso.')
+      return
+    }
+
+    setErrorMessage('')
+
+    try {
+      const alreadyUsed = await invoiceNumberExists(trimmedNumber)
+
+      if (alreadyUsed) {
+        setErrorMessage(`Sąskaitos numeris ${trimmedNumber} jau buvo naudotas kitame reise.`)
+        return
+      }
+
+      onInvoicesChange([...invoices, trimmedNumber])
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : 'Nepavyko patikrinti sąskaitos numerio. Bandykite dar kartą.'
+      setErrorMessage(message)
+    }
   }
 
   function handleScannerInput(event: React.KeyboardEvent<HTMLInputElement>) {
@@ -57,7 +80,7 @@ export function InvoiceScanPage({
     }
 
     event.preventDefault()
-    addInvoiceNumber(event.currentTarget.value)
+    void addInvoiceNumber(event.currentTarget.value)
     event.currentTarget.value = ''
     setScanPreview('')
     focusScanner()
@@ -161,7 +184,9 @@ export function InvoiceScanPage({
 
           {isCameraOpen ? (
             <BarcodeScanner
-              onDetected={addInvoiceNumber}
+              onDetected={(value) => {
+                void addInvoiceNumber(value)
+              }}
               onClose={() => setIsCameraOpen(false)}
             />
           ) : (
