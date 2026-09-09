@@ -1,17 +1,7 @@
 import { useEffect, useState } from 'react'
+import { downloadInvoicesCsv, downloadInvoicesExcel } from '../../lib/exportInvoices'
 import { supabase } from '../../lib/supabase'
-
-type InvoiceListItem = {
-  id: string
-  invoice_number: string
-  created_at: string
-  trips: {
-    trip_number: string
-    trip_date: string
-    drivers: { name: string } | null
-    vehicles: { plate_number: string } | null
-  } | null
-}
+import { InvoiceTable, type InvoiceListItem } from './InvoiceTable'
 
 type FilterOption = {
   id: string
@@ -167,10 +157,68 @@ export function InvoicesPage() {
     setSearch('')
   }
 
+  function toExportRows() {
+    return invoices.map((invoice) => ({
+      tripNumber: invoice.trips?.trip_number ?? '',
+      tripDate: invoice.trips?.trip_date ?? '',
+      vehiclePlate: invoice.trips?.vehicles?.plate_number ?? '',
+      driverName: invoice.trips?.drivers?.name ?? '',
+      invoiceNumber: invoice.invoice_number,
+    }))
+  }
+
+  function handleExportCsv() {
+    if (invoices.length === 0) {
+      return
+    }
+
+    try {
+      downloadInvoicesCsv(toExportRows())
+    } catch {
+      setErrorMessage('Nepavyko eksportuoti į CSV. Bandykite dar kartą.')
+    }
+  }
+
+  async function handleExportExcel() {
+    if (invoices.length === 0) {
+      return
+    }
+
+    try {
+      await downloadInvoicesExcel(toExportRows())
+    } catch {
+      setErrorMessage('Nepavyko eksportuoti į Excel. Bandykite dar kartą.')
+    }
+  }
+
   return (
     <section className="rounded-2xl bg-white p-6 shadow-lg">
-      <h1 className="text-2xl font-bold text-slate-900">Sąskaitos</h1>
-      <p className="mt-1 text-sm text-slate-600">Naujausios sąskaitos rodomos viršuje.</p>
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-bold text-slate-900">Sąskaitos</h1>
+          <p className="mt-1 text-sm text-slate-600">Naujausios sąskaitos rodomos viršuje.</p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            disabled={isLoading || invoices.length === 0}
+            onClick={() => {
+              void handleExportExcel()
+            }}
+            className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-slate-300"
+          >
+            Eksportuoti į Excel
+          </button>
+          <button
+            type="button"
+            disabled={isLoading || invoices.length === 0}
+            onClick={handleExportCsv}
+            className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:bg-slate-100"
+          >
+            Eksportuoti į CSV
+          </button>
+        </div>
+      </div>
 
       <label className="mt-6 flex flex-col gap-1.5 text-sm font-medium text-slate-700">
         Paieška
@@ -258,28 +306,7 @@ export function InvoicesPage() {
             {hasFilters ? 'Sąskaitų pagal pasirinktus filtrus nėra.' : 'Sąskaitų dar nėra.'}
           </p>
         ) : (
-          <table className="min-w-full text-left text-sm text-slate-800">
-            <thead>
-              <tr className="border-b border-slate-200 text-slate-600">
-                <th className="py-2 pr-3 font-medium">Numeris</th>
-                <th className="py-2 pr-3 font-medium">Data</th>
-                <th className="py-2 pr-3 font-medium">Automobilis</th>
-                <th className="py-2 pr-3 font-medium">Vairuotojas</th>
-                <th className="py-2 font-medium">Sąskaitos numeris</th>
-              </tr>
-            </thead>
-            <tbody>
-              {invoices.map((invoice) => (
-                <tr key={invoice.id} className="border-b border-slate-100">
-                  <td className="py-3 pr-3 font-medium">{invoice.trips?.trip_number ?? '—'}</td>
-                  <td className="py-3 pr-3">{invoice.trips?.trip_date ?? '—'}</td>
-                  <td className="py-3 pr-3">{invoice.trips?.vehicles?.plate_number ?? '—'}</td>
-                  <td className="py-3 pr-3">{invoice.trips?.drivers?.name ?? '—'}</td>
-                  <td className="py-3">{invoice.invoice_number}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <InvoiceTable invoices={invoices} />
         )}
       </div>
     </section>

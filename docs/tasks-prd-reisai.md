@@ -11,6 +11,7 @@ PRD: docs/prd-reisai.md
 - `src/pages/admin/VehiclesPage.tsx` – automobilių sąrašas ir forma
 - `src/pages/admin/DriversPage.tsx` – vairuotojų sąrašas ir forma
 - `src/pages/admin/TripsPage.tsx` – reisų sąrašas su filtrais ir eksportu
+- `src/pages/admin/TripTable.tsx` – reisų lentelė
 - `src/pages/admin/InvoicesPage.tsx` – sąskaitų sąrašas
 - `src/pages/admin/TripEditPage.tsx` – vieno reiso redagavimas
 - `src/pages/admin/AdminTripFormPage.tsx` – administratoriaus naujas reisas
@@ -21,7 +22,10 @@ PRD: docs/prd-reisai.md
 - `src/lib/invoiceExists.ts` – ar sąskaitos numeris jau naudotas
 - `src/lib/supabase.ts` – Supabase klientas
 - `src/lib/tripNumber.ts` – reiso numerio generavimo logika
-- `src/lib/exportTrips.ts` – Excel ir CSV eksportas
+- `src/lib/exportFile.ts` – bendras failo atsisiuntimas
+- `src/lib/exportTrips.ts` – reisų Excel ir CSV eksportas
+- `src/lib/exportInvoices.ts` – sąskaitų Excel ir CSV eksportas
+- `src/pages/admin/InvoiceTable.tsx` – sąskaitų lentelė
 - `src/types/database.ts` – TypeScript tipai lentelėms
 - `src/hooks/useActiveLists.ts` – aktyvių automobilių ir vairuotojų sąrašas iš Supabase
 - `src/hooks/useAuth.ts` – administratoriaus sesijos valdymas
@@ -69,7 +73,8 @@ PRD: docs/prd-reisai.md
   - [x] 5.25 Pridėti filtrus Sąskaitų skiltyje: data (nuo–iki), vairuotojas, automobilis
   - [x] 5.3 Pridėti paiešką pagal reiso numerį arba sąskaitos numerį
   - [x] 5.35 Pridėti paiešką Sąskaitų skiltyje pagal reiso arba sąskaitos numerį
-  - [ ] 5.5 Pridėti mygtukus „Eksportuoti į Excel" ir „Eksportuoti į CSV" (eksportuoja tik filtruotą sąrašą)
+  - [x] 5.5 Pridėti mygtukus „Eksportuoti į Excel" ir „Eksportuoti į CSV" (eksportuoja tik filtruotą sąrašą)
+  - [x] 5.55 Pridėti sąskaitų eksportą į Excel ir CSV (eksportuoja tik filtruotą sąrašą)
   - [ ] 5.6 Patikrinti naršyklėje: filtrai ir paieška veikia, Excel/CSV failas atsisiunčiamas
 
 - [ ] 6.0 PWA ir paleidimas internete

@@ -1,15 +1,7 @@
 import { useEffect, useState } from 'react'
+import { downloadTripsCsv, downloadTripsExcel } from '../../lib/exportTrips'
 import { supabase } from '../../lib/supabase'
-
-type TripListItem = {
-  id: string
-  trip_number: string
-  trip_date: string
-  created_at: string
-  drivers: { name: string } | null
-  vehicles: { plate_number: string } | null
-  invoices: { id: string }[] | null
-}
+import { TripTable, type TripListItem } from './TripTable'
 
 type FilterOption = {
   id: string
@@ -141,10 +133,68 @@ export function TripsPage() {
     setSearch('')
   }
 
+  function toExportRows() {
+    return trips.map((trip) => ({
+      tripNumber: trip.trip_number,
+      tripDate: trip.trip_date,
+      driverName: trip.drivers?.name ?? '',
+      vehiclePlate: trip.vehicles?.plate_number ?? '',
+      invoiceCount: trip.invoices?.length ?? 0,
+    }))
+  }
+
+  function handleExportCsv() {
+    if (trips.length === 0) {
+      return
+    }
+
+    try {
+      downloadTripsCsv(toExportRows())
+    } catch {
+      setErrorMessage('Nepavyko eksportuoti į CSV. Bandykite dar kartą.')
+    }
+  }
+
+  async function handleExportExcel() {
+    if (trips.length === 0) {
+      return
+    }
+
+    try {
+      await downloadTripsExcel(toExportRows())
+    } catch {
+      setErrorMessage('Nepavyko eksportuoti į Excel. Bandykite dar kartą.')
+    }
+  }
+
   return (
     <section className="rounded-2xl bg-white p-6 shadow-lg">
-      <h1 className="text-2xl font-bold text-slate-900">Reisai</h1>
-      <p className="mt-1 text-sm text-slate-600">Naujausi reisai rodomi viršuje.</p>
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-bold text-slate-900">Reisai</h1>
+          <p className="mt-1 text-sm text-slate-600">Naujausi reisai rodomi viršuje.</p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            disabled={isLoading || trips.length === 0}
+            onClick={() => {
+              void handleExportExcel()
+            }}
+            className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-slate-300"
+          >
+            Eksportuoti į Excel
+          </button>
+          <button
+            type="button"
+            disabled={isLoading || trips.length === 0}
+            onClick={handleExportCsv}
+            className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:bg-slate-100"
+          >
+            Eksportuoti į CSV
+          </button>
+        </div>
+      </div>
 
       <label className="mt-6 flex flex-col gap-1.5 text-sm font-medium text-slate-700">
         Paieška
@@ -232,28 +282,7 @@ export function TripsPage() {
             {hasFilters ? 'Reisų pagal pasirinktus filtrus nėra.' : 'Reisų dar nėra.'}
           </p>
         ) : (
-          <table className="min-w-full text-left text-sm text-slate-800">
-            <thead>
-              <tr className="border-b border-slate-200 text-slate-600">
-                <th className="py-2 pr-3 font-medium">Numeris</th>
-                <th className="py-2 pr-3 font-medium">Data</th>
-                <th className="py-2 pr-3 font-medium">Vairuotojas</th>
-                <th className="py-2 pr-3 font-medium">Automobilis</th>
-                <th className="py-2 font-medium">Sąskaitos</th>
-              </tr>
-            </thead>
-            <tbody>
-              {trips.map((trip) => (
-                <tr key={trip.id} className="border-b border-slate-100">
-                  <td className="py-3 pr-3 font-medium">{trip.trip_number}</td>
-                  <td className="py-3 pr-3">{trip.trip_date}</td>
-                  <td className="py-3 pr-3">{trip.drivers?.name ?? '—'}</td>
-                  <td className="py-3 pr-3">{trip.vehicles?.plate_number ?? '—'}</td>
-                  <td className="py-3">{trip.invoices?.length ?? 0}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <TripTable trips={trips} />
         )}
       </div>
     </section>
