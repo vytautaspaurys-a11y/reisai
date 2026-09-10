@@ -52,3 +52,19 @@ export function formatDateWithWeekday(tripDate: string): string {
 
   return `${tripDate}, ${weekday.toLowerCase()}`
 }
+
+export function formatDateTime(isoDateTime: string): string {
+  const date = new Date(isoDateTime)
+
+  if (Number.isNaN(date.getTime())) {
+    return isoDateTime
+  }
+
+  return date.toLocaleString('lt-LT', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+  })
+}

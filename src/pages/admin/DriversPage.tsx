@@ -6,6 +6,7 @@ type Driver = Database['public']['Tables']['drivers']['Row']
 
 const emptyForm = {
   name: '',
+  company: '',
   is_active: true,
 }
 
@@ -43,7 +44,7 @@ export function DriversPage() {
     try {
       const { data, error } = await supabase
         .from('drivers')
-        .select('id, name, is_active, created_at')
+        .select('id, name, company, is_active, created_at')
         .order('name')
 
       if (error) {
@@ -74,6 +75,7 @@ export function DriversPage() {
     setEditingId(driver.id)
     setForm({
       name: driver.name,
+      company: driver.company,
       is_active: driver.is_active,
     })
     setIsFormOpen(true)
@@ -94,6 +96,7 @@ export function DriversPage() {
 
     const payload = {
       name: form.name.trim(),
+      company: form.company.trim(),
       is_active: form.is_active,
     }
 
@@ -171,6 +174,16 @@ export function DriversPage() {
             />
           </label>
 
+          <label className="flex flex-col gap-1.5 text-sm font-medium text-slate-700">
+            Įmonė
+            <input
+              value={form.company}
+              onChange={(event) => setForm((current) => ({ ...current, company: event.target.value }))}
+              required
+              className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-base font-normal text-slate-900 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+            />
+          </label>
+
           <label className="flex items-center gap-2 text-sm font-medium text-slate-700">
             <input
               type="checkbox"
@@ -210,6 +223,7 @@ export function DriversPage() {
             <thead>
               <tr className="border-b border-slate-200 text-slate-600">
                 <th className="py-2 pr-3 font-medium">Vardas</th>
+                <th className="py-2 pr-3 font-medium">Įmonė</th>
                 <th className="py-2 pr-3 font-medium">Sąraše</th>
                 <th className="py-2 font-medium">Veiksmai</th>
               </tr>
@@ -218,6 +232,7 @@ export function DriversPage() {
               {drivers.map((driver) => (
                 <tr key={driver.id} className="border-b border-slate-100">
                   <td className="py-3 pr-3 font-medium">{driver.name}</td>
+                  <td className="py-3 pr-3">{driver.company || '—'}</td>
                   <td className="py-3 pr-3">{driver.is_active ? 'Taip' : 'Ne'}</td>
                   <td className="py-3">
                     <div className="flex flex-wrap gap-2">

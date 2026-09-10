@@ -3,18 +3,21 @@ export type Database = {
     Tables: {
       drivers: {
         Row: {
+          company: string
           created_at: string
           id: string
           is_active: boolean
           name: string
         }
         Insert: {
+          company: string
           created_at?: string
           id?: string
           is_active?: boolean
           name: string
         }
         Update: {
+          company?: string
           created_at?: string
           id?: string
           is_active?: boolean
@@ -134,6 +137,7 @@ export type Database = {
           p_vehicle_id: string
           p_trip_date: string
           p_invoice_numbers: string[]
+          p_notes?: string | null
         }
         Returns: string
       }
@@ -142,6 +146,17 @@ export type Database = {
           p_invoice_number: string
         }
         Returns: boolean
+      }
+      update_admin_trip: {
+        Args: {
+          p_trip_id: string
+          p_driver_id: string
+          p_vehicle_id: string
+          p_trip_date: string
+          p_notes?: string | null
+          p_invoice_numbers: string[]
+        }
+        Returns: undefined
       }
     }
     Enums: {
