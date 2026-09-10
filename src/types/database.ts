@@ -138,6 +138,7 @@ export type Database = {
           p_trip_date: string
           p_invoice_numbers: string[]
           p_notes?: string | null
+          p_trip_number?: string | null
         }
         Returns: string
       }

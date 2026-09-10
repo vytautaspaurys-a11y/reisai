@@ -15,10 +15,17 @@ PRD: docs/prd-reisai.md
 - `src/pages/admin/InvoicesPage.tsx` – sąskaitų sąrašas
 - `src/pages/admin/TripEditPage.tsx` – vieno reiso redagavimas
 - `src/pages/admin/AdminTripFormPage.tsx` – administratoriaus naujas reisas
+- `src/pages/admin/ManageTripsPage.tsx` – reisų tvarkymo sąrašas
+- `src/hooks/useTripEdit.ts` – esamo reiso taisymo logika
+- `src/lib/filterTripsNeedingEdit.ts` – reisai, kuriuos galimai reikia taisyti
+- `src/components/EditableInvoiceList.tsx` – sąskaitų sąrašas su numerio taisymu
 - `src/components/InvoiceList.tsx` – pridėtų sąskaitų sąrašas su pašalinimu
 - `src/components/BarcodeScanner.tsx` – brūkšninio kodo skenavimas (kamera / skaneris)
 - `src/components/TripSuccessMessage.tsx` – patvirtinimas po sėkmingo išsaugojimo
-- `src/lib/saveTrip.ts` – reiso ir sąskaitų išsaugojimas
+- `src/lib/importTrips.ts` – reisų importas iš Excel
+- `src/lib/parseTripImportExcel.ts` – Excel eilučių skaitymas ir sujungimas pagal numerį
+- `src/lib/downloadTripImportTemplate.ts` – Excel šablonas importui
+- `src/components/TripImportPanel.tsx` – importo mygtukai skiltyje Tvarkyti reisus
 - `src/lib/invoiceExists.ts` – ar sąskaitos numeris jau naudotas
 - `src/lib/supabase.ts` – Supabase klientas
 - `src/lib/tripNumber.ts` – reiso numerio generavimo logika
@@ -33,6 +40,9 @@ PRD: docs/prd-reisai.md
 - `supabase/migrations/001_initial_schema.sql` – lentelių ir RLS SQL (įklijuosi į Supabase SQL Editor)
 - `supabase/migrations/002_invoice_number_exists.sql` – sąskaitos numerio patikrinimo funkcija
 - `supabase/migrations/003_trip_notes.sql` – reiso pastabų laukas
+- `supabase/migrations/004_create_trip_notes_optional_invoices.sql` – reiso pastabos ir tuščios sąskaitos administratoriui
+- `supabase/migrations/005_update_admin_trip.sql` – esamo reiso taisymas
+- `supabase/migrations/007_create_trip_custom_number.sql` – importuojamo reiso numerio išsaugojimas
 - `public/manifest.webmanifest` – PWA manifestas
 - `.env` – Supabase raktai (necommitinama)
 
@@ -87,9 +97,10 @@ PRD: docs/prd-reisai.md
 - [ ] 7.0 Administratoriaus reisų redagavimas
   - [x] 7.1 Pridėti reiso lauką `notes` (pastabos) per SQL; rodyti jį Reisų ir Sąskaitų lentelėse
   - [x] 7.2 Meniu grupė „Redagavimas“: nuoroda „Tvarkyti reisus“
-  - [ ] 7.3 Administratoriaus forma naujam reisui: automobilis, vairuotojas, data, pastabos, sąskaitos (galima išsaugoti ir be sąskaitų)
+  - [x] 7.3 Administratoriaus forma naujam reisui: automobilis, vairuotojas, data, pastabos, sąskaitos (galima išsaugoti ir be sąskaitų)
   - [ ] 7.4 Esamo reiso tvarkymas: taisyti automobilį, vairuotoją, datą ir pastabas; pridėti arba pašalinti sąskaitas; ištrinti reisą
   - [ ] 7.5 Patikrinti naršyklėje: galima sukurti reisą, pridėti pamirštą sąskaitą, įrašyti pastabą ir ištrinti reisą
+  - [ ] 7.6 Importuoti reisus iš Excel lentelės
 
 - [x] 8.0 Pasirinktos dienos paaiškinimas reiso formoje
   - [x] 8.1 Prie „Pasirinkta diena“ rodyti savaitės dieną ir pridėti „Šiandien“ arba „Rytoj“, jei pasirinkta ta data; kitoms datoms papildomo žodžio nerašyti

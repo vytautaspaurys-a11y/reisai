@@ -23,13 +23,23 @@ function getSaveErrorMessage(error: unknown): string {
     return rawMessage
   }
 
+  if (rawMessage.includes('jau yra')) {
+    return rawMessage
+  }
+
   return 'Nepavyko išsaugoti reiso. Bandykite dar kartą.'
 }
 
-export async function saveTrip(trip: TripDraft, invoices: string[]): Promise<string> {
+export async function saveTrip(
+  trip: Pick<TripDraft, 'driverId' | 'vehicleId' | 'tripDate'>,
+  invoices: string[],
+  options: { notes?: string; allowEmptyInvoices?: boolean; tripNumber?: string } = {},
+): Promise<string> {
   const invoiceNumbers = invoices.map((invoice) => invoice.trim()).filter(Boolean)
+  const notes = options.notes?.trim() || null
+  const tripNumber = options.tripNumber?.trim() || null
 
-  if (invoiceNumbers.length === 0) {
+  if (invoiceNumbers.length === 0 && !options.allowEmptyInvoices) {
     throw new Error('Pridėkite bent vieną sąskaitą.')
   }
 
@@ -38,6 +48,8 @@ export async function saveTrip(trip: TripDraft, invoices: string[]): Promise<str
     p_vehicle_id: trip.vehicleId,
     p_trip_date: trip.tripDate,
     p_invoice_numbers: invoiceNumbers,
+    p_notes: notes,
+    p_trip_number: tripNumber,
   })
 
   if (error) {
