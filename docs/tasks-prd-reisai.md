@@ -7,7 +7,7 @@ PRD: docs/prd-reisai.md
 - `src/pages/TripFormPage.tsx` – vairuotojo reiso registravimo forma
 - `src/pages/DriverApp.tsx` – vairuotojo reiso registravimo eiga
 - `src/pages/admin/LoginPage.tsx` – administratoriaus prisijungimas
-- `src/pages/admin/AdminLayout.tsx` – admin navigacija (Automobiliai, Vairuotojai, Reisai, Sąskaitos)
+- `src/pages/admin/AdminLayout.tsx` – admin navigacija (Automobiliai, Vairuotojai, Reisai, Sąskaitos, Tvarkyti reisus)
 - `src/pages/admin/VehiclesPage.tsx` – automobilių sąrašas ir forma
 - `src/pages/admin/DriversPage.tsx` – vairuotojų sąrašas ir forma
 - `src/pages/admin/TripsPage.tsx` – reisų sąrašas su filtrais ir eksportu
@@ -86,7 +86,7 @@ PRD: docs/prd-reisai.md
 
 - [ ] 7.0 Administratoriaus reisų redagavimas
   - [x] 7.1 Pridėti reiso lauką `notes` (pastabos) per SQL; rodyti jį Reisų ir Sąskaitų lentelėse
-  - [ ] 7.2 Meniu grupė „Redagavimas“: nuoroda „Tvarkyti reisus“
+  - [x] 7.2 Meniu grupė „Redagavimas“: nuoroda „Tvarkyti reisus“
   - [ ] 7.3 Administratoriaus forma naujam reisui: automobilis, vairuotojas, data, pastabos, sąskaitos (galima išsaugoti ir be sąskaitų)
   - [ ] 7.4 Esamo reiso tvarkymas: taisyti automobilį, vairuotoją, datą ir pastabas; pridėti arba pašalinti sąskaitas; ištrinti reisą
   - [ ] 7.5 Patikrinti naršyklėje: galima sukurti reisą, pridėti pamirštą sąskaitą, įrašyti pastabą ir ištrinti reisą

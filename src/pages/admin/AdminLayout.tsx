@@ -56,6 +56,15 @@ export function AdminLayout() {
                 </NavLink>
               </div>
             </div>
+            <div className="hidden h-12 w-px self-center bg-slate-200 sm:block" />
+            <div>
+              <p className="mb-1 text-xs font-medium text-slate-500">Redagavimas</p>
+              <div className="flex flex-wrap gap-2">
+                <NavLink to="/admin/manage-trips" className={navClassName}>
+                  Tvarkyti reisus
+                </NavLink>
+              </div>
+            </div>
             <button
               type="button"
               onClick={() => {

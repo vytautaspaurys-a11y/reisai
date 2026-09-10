@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { AdminLayout } from './pages/admin/AdminLayout'
+import { AdminPlaceholderPage } from './pages/admin/AdminPlaceholderPage'
 import { LoginPage } from './pages/admin/LoginPage'
 import { ProtectedAdmin } from './pages/admin/ProtectedAdmin'
 import { DriversPage } from './pages/admin/DriversPage'
@@ -20,6 +21,10 @@ export default function App() {
           <Route path="drivers" element={<DriversPage />} />
           <Route path="trips" element={<TripsPage />} />
           <Route path="invoices" element={<InvoicesPage />} />
+          <Route
+            path="manage-trips"
+            element={<AdminPlaceholderPage title="Tvarkyti reisus" />}
+          />
         </Route>
       </Route>
     </Routes>
