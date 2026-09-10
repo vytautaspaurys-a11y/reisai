@@ -94,13 +94,13 @@ PRD: docs/prd-reisai.md
   - [ ] 6.3 Sujungti projektą su Vercel, nustatyti aplinkos kintamuosius (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`)
   - [ ] 6.4 Patikrinti: svetainė veikia internete; telefone galima pridėti į pradžios ekraną ir skenuoti kamera
 
-- [ ] 7.0 Administratoriaus reisų redagavimas
+- [x] 7.0 Administratoriaus reisų redagavimas
   - [x] 7.1 Pridėti reiso lauką `notes` (pastabos) per SQL; rodyti jį Reisų ir Sąskaitų lentelėse
   - [x] 7.2 Meniu grupė „Redagavimas“: nuoroda „Tvarkyti reisus“
   - [x] 7.3 Administratoriaus forma naujam reisui: automobilis, vairuotojas, data, pastabos, sąskaitos (galima išsaugoti ir be sąskaitų)
-  - [ ] 7.4 Esamo reiso tvarkymas: taisyti automobilį, vairuotoją, datą ir pastabas; pridėti arba pašalinti sąskaitas; ištrinti reisą
-  - [ ] 7.5 Patikrinti naršyklėje: galima sukurti reisą, pridėti pamirštą sąskaitą, įrašyti pastabą ir ištrinti reisą
-  - [ ] 7.6 Importuoti reisus iš Excel lentelės
+  - [x] 7.4 Esamo reiso tvarkymas: taisyti automobilį, vairuotoją, datą ir pastabas; pridėti arba pašalinti sąskaitas; ištrinti reisą
+  - [x] 7.5 Patikrinti naršyklėje: galima sukurti reisą, pridėti pamirštą sąskaitą, įrašyti pastabą ir ištrinti reisą
+  - [x] 7.6 Importuoti reisus iš Excel lentelės
 
 - [x] 8.0 Pasirinktos dienos paaiškinimas reiso formoje
   - [x] 8.1 Prie „Pasirinkta diena“ rodyti savaitės dieną ir pridėti „Šiandien“ arba „Rytoj“, jei pasirinkta ta data; kitoms datoms papildomo žodžio nerašyti
