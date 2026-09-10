@@ -5,6 +5,7 @@ export type InvoiceListItem = {
   trips: {
     trip_number: string
     trip_date: string
+    notes: string | null
     drivers: { name: string } | null
     vehicles: { plate_number: string } | null
   } | null
@@ -23,7 +24,8 @@ export function InvoiceTable({ invoices }: InvoiceTableProps) {
           <th className="py-2 pr-3 font-medium">Data</th>
           <th className="py-2 pr-3 font-medium">Automobilis</th>
           <th className="py-2 pr-3 font-medium">Vairuotojas</th>
-          <th className="py-2 font-medium">Sąskaitos numeris</th>
+          <th className="py-2 pr-3 font-medium">Sąskaitos numeris</th>
+          <th className="py-2 font-medium">Pastabos</th>
         </tr>
       </thead>
       <tbody>
@@ -33,7 +35,8 @@ export function InvoiceTable({ invoices }: InvoiceTableProps) {
             <td className="py-3 pr-3">{invoice.trips?.trip_date ?? '—'}</td>
             <td className="py-3 pr-3">{invoice.trips?.vehicles?.plate_number ?? '—'}</td>
             <td className="py-3 pr-3">{invoice.trips?.drivers?.name ?? '—'}</td>
-            <td className="py-3">{invoice.invoice_number}</td>
+            <td className="py-3 pr-3">{invoice.invoice_number}</td>
+            <td className="py-3">{invoice.trips?.notes?.trim() ? invoice.trips.notes : '—'}</td>
           </tr>
         ))}
       </tbody>

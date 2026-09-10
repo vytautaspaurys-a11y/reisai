@@ -103,7 +103,7 @@ export function InvoicesPage() {
         let query = supabase
           .from('invoices')
           .select(
-            'id, invoice_number, created_at, trips(trip_number, trip_date, drivers(name), vehicles(plate_number))',
+            'id, invoice_number, created_at, trips(trip_number, trip_date, notes, drivers(name), vehicles(plate_number))',
           )
           .order('created_at', { ascending: false })
 

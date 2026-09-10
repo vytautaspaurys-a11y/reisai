@@ -32,6 +32,7 @@ PRD: docs/prd-reisai.md
 - `src/App.tsx` – maršrutai (vairuotojo forma, admin sritis)
 - `supabase/migrations/001_initial_schema.sql` – lentelių ir RLS SQL (įklijuosi į Supabase SQL Editor)
 - `supabase/migrations/002_invoice_number_exists.sql` – sąskaitos numerio patikrinimo funkcija
+- `supabase/migrations/003_trip_notes.sql` – reiso pastabų laukas
 - `public/manifest.webmanifest` – PWA manifestas
 - `.env` – Supabase raktai (necommitinama)
 
@@ -84,7 +85,7 @@ PRD: docs/prd-reisai.md
   - [ ] 6.4 Patikrinti: svetainė veikia internete; telefone galima pridėti į pradžios ekraną ir skenuoti kamera
 
 - [ ] 7.0 Administratoriaus reisų redagavimas
-  - [ ] 7.1 Pridėti reiso lauką `notes` (pastabos) per SQL; rodyti jį Reisų ir Sąskaitų lentelėse
+  - [x] 7.1 Pridėti reiso lauką `notes` (pastabos) per SQL; rodyti jį Reisų ir Sąskaitų lentelėse
   - [ ] 7.2 Meniu grupė „Redagavimas“: nuoroda „Tvarkyti reisus“
   - [ ] 7.3 Administratoriaus forma naujam reisui: automobilis, vairuotojas, data, pastabos, sąskaitos (galima išsaugoti ir be sąskaitų)
   - [ ] 7.4 Esamo reiso tvarkymas: taisyti automobilį, vairuotoją, datą ir pastabas; pridėti arba pašalinti sąskaitas; ištrinti reisą

@@ -67,7 +67,7 @@ export function TripsPage() {
         let query = supabase
           .from('trips')
           .select(
-            'id, trip_number, trip_date, created_at, drivers(name), vehicles(plate_number), invoices(id)',
+            'id, trip_number, trip_date, notes, created_at, drivers(name), vehicles(plate_number), invoices(id)',
           )
           .order('created_at', { ascending: false })
 

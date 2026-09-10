@@ -2,6 +2,7 @@ export type TripListItem = {
   id: string
   trip_number: string
   trip_date: string
+  notes: string | null
   created_at: string
   drivers: { name: string } | null
   vehicles: { plate_number: string } | null
@@ -21,7 +22,8 @@ export function TripTable({ trips }: TripTableProps) {
           <th className="py-2 pr-3 font-medium">Data</th>
           <th className="py-2 pr-3 font-medium">Vairuotojas</th>
           <th className="py-2 pr-3 font-medium">Automobilis</th>
-          <th className="py-2 font-medium">Sąskaitos</th>
+          <th className="py-2 pr-3 font-medium">Sąskaitos</th>
+          <th className="py-2 font-medium">Pastabos</th>
         </tr>
       </thead>
       <tbody>
@@ -31,7 +33,8 @@ export function TripTable({ trips }: TripTableProps) {
             <td className="py-3 pr-3">{trip.trip_date}</td>
             <td className="py-3 pr-3">{trip.drivers?.name ?? '—'}</td>
             <td className="py-3 pr-3">{trip.vehicles?.plate_number ?? '—'}</td>
-            <td className="py-3">{trip.invoices?.length ?? 0}</td>
+            <td className="py-3 pr-3">{trip.invoices?.length ?? 0}</td>
+            <td className="py-3">{trip.notes?.trim() ? trip.notes : '—'}</td>
           </tr>
         ))}
       </tbody>

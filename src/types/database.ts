@@ -56,6 +56,7 @@ export type Database = {
           created_at: string
           driver_id: string
           id: string
+          notes: string | null
           trip_date: string
           trip_number: string
           vehicle_id: string
@@ -64,6 +65,7 @@ export type Database = {
           created_at?: string
           driver_id: string
           id?: string
+          notes?: string | null
           trip_date: string
           trip_number: string
           vehicle_id: string
@@ -72,6 +74,7 @@ export type Database = {
           created_at?: string
           driver_id?: string
           id?: string
+          notes?: string | null
           trip_date?: string
           trip_number?: string
           vehicle_id?: string
